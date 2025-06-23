@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import About from "./pages/About";
@@ -77,29 +77,27 @@ function App() {
   }, [window.location.pathname]);
 
   return (
-    <Router>
-      <div className="app-layout">
-        <header className="header">
-          <div className="logo">Mama Saida</div>
-          <nav>
-            <Link to="/">Accueil</Link>
-            <Link to="/produits">Produits</Link>
-            <Link to="/histoire">Notre Histoire</Link>
-          </nav>
-        </header>
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/produits" element={<Products products={EXAMPLE_PRODUCTS} addToCart={addToCart} />} />
-            <Route path="/histoire" element={<About />} />
-            <Route path="/panier" element={<Cart cartItems={cart} onQuantityChange={handleQuantityChange} onRemove={handleRemove} onOrder={handleOrder} form={form} onFormChange={handleFormChange} />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <CartButton count={cart.reduce((sum, i) => sum + i.quantity, 0)} onClick={handleCartClick} />
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <div className="app-layout">
+      <header className="header">
+        <div className="logo">Mama Saida</div>
+        <nav>
+          <Link to="/">Accueil</Link>
+          <Link to="/produits">Produits</Link>
+          <Link to="/histoire">Notre Histoire</Link>
+        </nav>
+      </header>
+      <main className="main-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/produits" element={<Products products={EXAMPLE_PRODUCTS} addToCart={addToCart} />} />
+          <Route path="/histoire" element={<About />} />
+          <Route path="/panier" element={<Cart cartItems={cart} onQuantityChange={handleQuantityChange} onRemove={handleRemove} onOrder={handleOrder} form={form} onFormChange={handleFormChange} />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <CartButton count={cart.reduce((sum, i) => sum + i.quantity, 0)} onClick={handleCartClick} />
+      </main>
+      <Footer />
+    </div>
   );
 }
 
